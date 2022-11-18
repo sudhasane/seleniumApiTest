@@ -23,8 +23,8 @@ GetCustomerDetails getCustomerDetails = new GetCustomerDetails();
     @Test
     public void verifyXLXS(){
         xlxsReader.ExcelXLSReader("src/test/resources/testData/DomainsJourneyMockData.xlsx");
-        xlxsReader.getCellData("Sheet1", 2);
-        xlxsReader.verifyCustomerDetails("Sheet1", 2);
+       // xlxsReader.getCellData("Sheet1", 2);
+        xlxsReader.verifyCustomerDetails("Sheet1", 201);
         
     }
 

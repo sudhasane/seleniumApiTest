@@ -111,54 +111,8 @@ public class XLXSReader {
     }
 
 
-    public void getCellData(String sheetName, int columnNum) {
-        int rows = getRowCount("Sheet1");
-        System.out.println("number of rows " + rows);
-        for (int row = 1; row <= rows; row++) {
-            customerId = getCellData("Sheet1", 0, row);
-            expectedResult = getCellData("Sheet1", 1, row);
-           String actualResult =  getCustomerDetails.getActualResult(customerId);
-            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, actualResult));
-        }
-
-    }
-
-    public void verifyCustomerDetails(String sheetName, int columnNum){
-        int rows = getRowCount("Sheet1");
-        System.out.println("number of rows " + rows);
-        for (int row = 1; row <= rows; row++) {
-            customerId = getCellData("Sheet1", 0, row);
-            expectedResult = getCellData("Sheet1", 1, row);
-
-            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "testexcelres"));
-        }
-
-
-    }
-
-
-    public String readCustomerIdFromExcel(){
-        String customerId = null;
-        int rows = getRowCount("Sheet1");
-        System.out.println("number of rows " + rows);
-        for (int row = 1; row <= rows; row++) {
-            customerId = getCellData("Sheet1", 0, row);
-
-        }
-        return customerId;
-
-    }
-
-    public void writeActualResultToExcel(String sheetName, int columnNum, int row, String actualResult){
-        setCellData(sheetName, columnNum, row, actualResult);
-    }
-
-
-
-
-
     // returns the data from a cell
-    public String   getCellData(String sheetName, int colNum, int rowNum) {
+    public String getCellData(String sheetName, int colNum, int rowNum) {
         try {
             if (rowNum <= 0)
                 return "";
@@ -187,7 +141,6 @@ public class XLXSReader {
             return "row " + rowNum + " or column " + colNum + " does not exist  in xls";
         }
     }
-
 
 
     // returns true if data is set successfully else false
@@ -287,6 +240,29 @@ public class XLXSReader {
     }
 
 
+    public void verifyCustomerDetails(String sheetName, int columnNum) {
+        int rows = getRowCount("Sheet1");
+        System.out.println("number of rows " + rows);
+        for (int row = 1; row <= rows; row++) {
+            customerId = getCellData("Sheet1", 0, row);
+            expectedResult = getCellData("Sheet1", 1, row);
 
+            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "actaul response"));
+        }
+
+
+    }
+
+    public void getCellData(String sheetName, int columnNum) {
+        int rows = getRowCount("Sheet1");
+        System.out.println("number of rows " + rows);
+        for (int row = 1; row <= rows; row++) {
+            customerId = getCellData("Sheet1", 0, row);
+            expectedResult = getCellData("Sheet1", 1, row);
+            String actualResult = getCustomerDetails.getActualResult(customerId);
+            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, actualResult));
+        }
+
+    }
 
 }
