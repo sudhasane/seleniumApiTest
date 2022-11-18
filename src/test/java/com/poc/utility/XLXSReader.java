@@ -240,25 +240,22 @@ public class XLXSReader {
     }
 
 
-    public void verifyCustomerDetails(String sheetName, int columnNum) {
+    public void getCellData(String sheetName, int columnNum) {
         int rows = getRowCount("Sheet1");
         System.out.println("number of rows " + rows);
         for (int row = 1; row <= rows; row++) {
             customerId = getCellData("Sheet1", 0, row);
-            expectedResult = getCellData("Sheet1", 1, row);
 
             System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "actaul response"));
         }
 
 
     }
-
-    public void getCellData(String sheetName, int columnNum) {
+    public void verifyCustomerDetails(String sheetName, int columnNum) {
         int rows = getRowCount("Sheet1");
         System.out.println("number of rows " + rows);
         for (int row = 1; row <= rows; row++) {
             customerId = getCellData("Sheet1", 0, row);
-            expectedResult = getCellData("Sheet1", 1, row);
             String actualResult = getCustomerDetails.getActualResult(customerId);
             System.out.println("write customer data " + setCellData(sheetName, columnNum, row, actualResult));
         }
