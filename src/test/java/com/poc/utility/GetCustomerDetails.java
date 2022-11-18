@@ -3,12 +3,12 @@ package com.poc.utility;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-public class RestCalls {
+public class GetCustomerDetails {
 
-    public void getActualResult(String customerid){
+    public String getActualResult(String customerid){
         RestAssured.baseURI = "https://";
 
-        String actualResult = RestAssured.given()
+       return RestAssured.given()
                 .contentType(ContentType.JSON)
                 .get(customerid).then().log().all().extract().response().path("").toString();
 

@@ -1,18 +1,14 @@
 package com.poc.utility;
 
-import org.apache.poi.common.usermodel.HyperlinkType;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Calendar;
 
 public class XLXSReader {
+    GetCustomerDetails getCustomerDetails = new GetCustomerDetails();
     public String expectedResult;
     public String customerId;
     public String path;
@@ -22,6 +18,7 @@ public class XLXSReader {
     private XSSFSheet sheet = null;
     private XSSFRow row = null;
     private XSSFCell cell = null;
+    private int columnNum;
 
     public void ExcelXLSReader(String path) {
 
@@ -114,21 +111,54 @@ public class XLXSReader {
     }
 
 
-    public void getCellData() {
-        int rows = 6;
+    public void getCellData(String sheetName, int columnNum) {
+        int rows = getRowCount("Sheet1");
         System.out.println("number of rows " + rows);
-        for (int row = 1; row < rows; row++) {
-            customerId = getCellData("customer", 0, row);
-            expectedResult = getCellData("customer", 201, row);
-            System.out.println("customet id is " + customerId);
-            System.out.println("expectedResult is " + expectedResult);
+        for (int row = 1; row <= rows; row++) {
+            customerId = getCellData("Sheet1", 0, row);
+            expectedResult = getCellData("Sheet1", 1, row);
+           String actualResult =  getCustomerDetails.getActualResult(customerId);
+            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, actualResult));
         }
 
     }
 
+    public void verifyCustomerDetails(String sheetName, int columnNum){
+        int rows = getRowCount("Sheet1");
+        System.out.println("number of rows " + rows);
+        for (int row = 1; row <= rows; row++) {
+            customerId = getCellData("Sheet1", 0, row);
+            expectedResult = getCellData("Sheet1", 1, row);
+
+            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "testexcelres"));
+        }
+
+
+    }
+
+
+    public String readCustomerIdFromExcel(){
+        String customerId = null;
+        int rows = getRowCount("Sheet1");
+        System.out.println("number of rows " + rows);
+        for (int row = 1; row <= rows; row++) {
+            customerId = getCellData("Sheet1", 0, row);
+
+        }
+        return customerId;
+
+    }
+
+    public void writeActualResultToExcel(String sheetName, int columnNum, int row, String actualResult){
+        setCellData(sheetName, columnNum, row, actualResult);
+    }
+
+
+
+
 
     // returns the data from a cell
-    public String getCellData(String sheetName, int colNum, int rowNum) {
+    public String   getCellData(String sheetName, int colNum, int rowNum) {
         try {
             if (rowNum <= 0)
                 return "";
@@ -158,7 +188,10 @@ public class XLXSReader {
         }
     }
 
+
+
     // returns true if data is set successfully else false
+    // set Cell data by providing column name as argument
     public boolean setCellData(String sheetName, String colName, int rowNum, String data) {
         try {
             fis = new FileInputStream(path);
@@ -175,8 +208,8 @@ public class XLXSReader {
             sheet = workbook.getSheetAt(index);
 
             row = sheet.getRow(0);
-            for (int i = 0; i < row.getLastCellNum(); i++) {
-                // System.out.println(row.getCell(i).getStringCellValue().trim());
+            for (int i = 0; i <= row.getLastCellNum(); i++) {
+                // System.out.println("column name is + " + row.getCell(i).getStringCellValue().trim());
                 if (row.getCell(i).getStringCellValue().trim().equals(colName))
                     colNum = i;
             }
@@ -210,6 +243,49 @@ public class XLXSReader {
         }
         return true;
     }
+
+
+    // set Cell data by providing column number as argument
+    public boolean setCellData(String sheetName, int colNum, int rowNum, String data) {
+        try {
+            fis = new FileInputStream(path);
+            workbook = new XSSFWorkbook(fis);
+
+            if (rowNum <= 0)
+                return false;
+
+            int index = workbook.getSheetIndex(sheetName);
+            if (index == -1)
+                return false;
+
+            sheet = workbook.getSheetAt(index);
+            row = sheet.getRow(rowNum - 1);
+            if (row == null)
+                row = sheet.createRow(rowNum - 1);
+
+            cell = row.getCell(colNum);
+            if (cell == null)
+                cell = row.createCell(colNum);
+
+            // cell style
+            // CellStyle cs = workbook.createCellStyle();
+            // cs.setWrapText(true);
+            // cell.setCellStyle(cs);
+            cell.setCellValue(data);
+
+            fileOut = new FileOutputStream(path);
+
+            workbook.write(fileOut);
+
+            fileOut.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 
 
 

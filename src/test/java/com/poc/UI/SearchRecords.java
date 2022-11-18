@@ -3,8 +3,7 @@ package com.poc.UI;
 import com.poc.utility.DriverUtils;
 import org.openqa.selenium.By;
 
-
-import static com.poc.utility.DriverSetup.driver;
+import static com.poc.steps.CucumberHooks.driver;
 import static com.poc.utility.TestConstants.url;
 
 public class SearchRecords extends DriverUtils {

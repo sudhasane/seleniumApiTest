@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.*;
 
-import static com.poc.utility.DriverSetup.driver;
+import static com.poc.steps.CucumberHooks.driver;
 
 public class DriverUtils {
 
