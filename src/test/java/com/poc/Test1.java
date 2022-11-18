@@ -22,8 +22,11 @@ GetCustomerDetails getCustomerDetails = new GetCustomerDetails();
 
     @Test
     public void verifyXLXS(){
-        xlxsReader.ExcelXLSReader("src/test/resources/testData/DomainsJourneyMockData.xlsx");
-        xlxsReader.getCellData("Sheet1", 2);
+        xlxsReader.ExcelXLSReader("/home/sudhas/Downloads/TestPoi.xlsx");
+        int columnNumber = xlxsReader.getCellNumber("Sheet1", "Result");
+        xlxsReader.getCellData("Sheet1", columnNumber);
+
+
         //xlxsReader.verifyCustomerDetails("Sheet1", 201);
         
     }

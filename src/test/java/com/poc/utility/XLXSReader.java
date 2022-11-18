@@ -243,14 +243,14 @@ public class XLXSReader {
     public void getCellData(String sheetName, int columnNum) {
         int rows = getRowCount("Sheet1");
         System.out.println("number of rows " + rows);
-        for (int row = 1; row <= rows; row++) {
+        for (int row = 2; row <= rows; row++) {
             customerId = getCellData("Sheet1", 0, row);
-
-            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "actaul response"));
+            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "test response"));
         }
 
 
     }
+
     public void verifyCustomerDetails(String sheetName, int columnNum) {
         int rows = getRowCount("Sheet1");
         System.out.println("number of rows " + rows);
@@ -261,5 +261,36 @@ public class XLXSReader {
         }
 
     }
+
+
+    public int getCellNumber(String sheetName, String colName) {
+        int colNum = 0;
+        try {
+            fis = new FileInputStream(path);
+            workbook = new XSSFWorkbook(fis);
+
+
+            int index = workbook.getSheetIndex(sheetName);
+            if (index == -1)
+                return 0;
+
+            sheet = workbook.getSheetAt(index);
+
+            row = sheet.getRow(0);
+            for (int i = 0; i < row.getLastCellNum(); i++) {
+                System.out.println("column name is + " + row.getCell(i).getStringCellValue().trim());
+                if (row.getCell(i).getStringCellValue().trim().equals(colName))
+                    colNum = i;
+                break;
+            }
+            return colNum;
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return colNum;
+    }
+
 
 }

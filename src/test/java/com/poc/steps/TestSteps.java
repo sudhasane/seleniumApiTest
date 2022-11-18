@@ -13,13 +13,7 @@ public class TestSteps {
 
     @Given("I read customerId from excel")
     public void iReadCustomerIdFromExcel() {
-        xlxsReader.ExcelXLSReader("src/test/resources/testData/DomainsJourneyMockData.xlsx");
 
-        //This method read data from excel sheet  write data to a given column number
-        xlxsReader.getCellData("Sheet1", 201);
-
-        //below method need api response details to run
-        xlxsReader.verifyCustomerDetails("Sheet1", 201);
     }
 
     @And("I search for customer in UI")
@@ -28,5 +22,12 @@ public class TestSteps {
 
     @And("I verify customer details")
     public void iVerifyCustomerDetails() {
+        xlxsReader.ExcelXLSReader("src/test/resources/testData/DomainsJourneyMockData.xlsx");
+
+        int columnNum = xlxsReader.getCellNumber("Sheet1", "Actual Stage" );
+        xlxsReader.getCellData("Sheet1", columnNum);
+
+        //below method would fail as get response from api to get expected result is not implemented)
+        xlxsReader.verifyCustomerDetails("Sheet1", columnNum);
     }
 }
