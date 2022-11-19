@@ -1,0 +1,57 @@
+{
+  "Status": "OK",
+  "ContainerList": [   {
+    "Status": "OK",
+    "ContainerName": "AMMyaccountHome",
+    "NextBestActions":       [
+      {
+        "ActionID": "EducateAction",
+        "Action": "Educate action",
+        "RankedResults": [            {
+          "Group": "Generic",
+          "InteractionID": "-4330855432702423459",
+          "Issue": "Educate",
+          "OnPageDisclaimer": "",
+          "Channel": "Web",
+          "AEMContentFragmentDynamicCTB": "",
+          "Rank": 1,
+          "PageSubHeader": "",
+          "CardID": "Card1",
+          "Direction": "Inbound",
+          "Name": "KBSearch",
+          "ModalDisclaimer": "",
+          "TemplateIDDynamicCTB": "",
+          "Identifier": "/Educate/Generic/KBSearch",
+          "PageHeader": "",
+          "AEMContentFragmentVariation": "/educate/generic/kbsearch/wcom/web/ammyaccounthome/kbsearch1.json",
+          "CardBanner": "",
+          "TemplateID": "KBSearch"
+        }]
+      },
+      {
+        "Action": "Acquisition action",
+        "ActionID": "AcquisitionAction",
+        "RankedResults": [            {
+          "Group": "DomainVAS",
+          "InteractionID": "-4330855432702423459",
+          "OnPageDisclaimer": "",
+          "Issue": "Acquisition",
+          "AEMContentFragmentDynamicCTB": "",
+          "Channel": "Web",
+          "Rank": 2,
+          "PageSubHeader": "",
+          "CardID": "Card2",
+          "Direction": "Inbound",
+          "Name": "DomainForwarding_Mo",
+          "ModalDisclaimer": "",
+          "Identifier": "/Acquisition/DomainVAS/DomainForwarding_Mo",
+          "TemplateIDDynamicCTB": "",
+          "PageHeader": "",
+          "AEMContentFragmentVariation": "/acquisition/domainvas/domainforwarding_mo/wcom/web/ammyaccounthome/amcardtextonly1.json",
+          "CardBanner": "",
+          "TemplateID": "AMCardTextOnly"
+        }]
+      }
+    ]
+  }]
+}

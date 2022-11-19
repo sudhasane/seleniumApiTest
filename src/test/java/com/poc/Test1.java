@@ -23,7 +23,7 @@ GetCustomerDetails getCustomerDetails = new GetCustomerDetails();
     @Test
     public void verifyXLXS(){
         xlxsReader.ExcelXLSReader("/home/sudhas/Downloads/TestPoi.xlsx");
-        int columnNumber = xlxsReader.getCellNumber("Sheet1", "Result");
+        int columnNumber = xlxsReader.getColumnNumber("Sheet1", "Result");
         xlxsReader.getCellData("Sheet1", columnNumber);
 
 

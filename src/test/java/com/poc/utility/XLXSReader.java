@@ -47,9 +47,9 @@ public class XLXSReader {
         }
 
     }
-    // returns the data from a cell
+    // returns the data from a cell given columnName
 
-    public String getCellData(String sheetName, String colName, int rowNum) {
+    public String getCellDataWithColumnName(String sheetName, String colName, int rowNum) {
         try {
             if (rowNum <= 0)
                 return "";
@@ -111,8 +111,8 @@ public class XLXSReader {
     }
 
 
-    // returns the data from a cell
-    public String getCellData(String sheetName, int colNum, int rowNum) {
+    // returns the data from a cell given columnNumber
+    public String getCellDataWithColumnNumber(String sheetName, int colNum, int rowNum) {
         try {
             if (rowNum <= 0)
                 return "";
@@ -145,7 +145,7 @@ public class XLXSReader {
 
     // returns true if data is set successfully else false
     // set Cell data by providing column name as argument
-    public boolean setCellData(String sheetName, String colName, int rowNum, String data) {
+    public boolean setCellDataWithColumnName(String sheetName, String colName, int rowNum, String data) {
         try {
             fis = new FileInputStream(path);
             workbook = new XSSFWorkbook(fis);
@@ -198,8 +198,9 @@ public class XLXSReader {
     }
 
 
-    // set Cell data by providing column number as argument
-    public boolean setCellData(String sheetName, int colNum, int rowNum, String data) {
+    // returns true if data is set successfully else false
+    // write data to  Cell  by providing sheetName, column number , rowNum and cellData as argument
+    public boolean setCellDataWithColumnNumber(String sheetName, int colNum, int rowNum, String data) {
         try {
             fis = new FileInputStream(path);
             workbook = new XSSFWorkbook(fis);
@@ -240,30 +241,8 @@ public class XLXSReader {
     }
 
 
-    public void getCellData(String sheetName, int columnNum) {
-        int rows = getRowCount("Sheet1");
-        System.out.println("number of rows " + rows);
-        for (int row = 2; row <= rows; row++) {
-            customerId = getCellData("Sheet1", 0, row);
-            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, "test response"));
-        }
-
-
-    }
-
-    public void verifyCustomerDetails(String sheetName, int columnNum) {
-        int rows = getRowCount("Sheet1");
-        System.out.println("number of rows " + rows);
-        for (int row = 1; row <= rows; row++) {
-            customerId = getCellData("Sheet1", 0, row);
-            String actualResult = getCustomerDetails.getActualResult(customerId);
-            System.out.println("write customer data " + setCellData(sheetName, columnNum, row, actualResult));
-        }
-
-    }
-
-
-    public int getCellNumber(String sheetName, String colName) {
+    //get the column number given sheetName and column name as arguments
+    public int getColumnNumber(String sheetName, String colName) {
         int colNum = 0;
         try {
             fis = new FileInputStream(path);
@@ -290,6 +269,28 @@ public class XLXSReader {
             e.printStackTrace();
         }
         return colNum;
+    }
+
+    public void getCellData(String sheetName, int columnNum) {
+        int rows = getRowCount("Sheet1");
+        System.out.println("number of rows " + rows);
+        for (int row = 2; row <= rows; row++) {
+            customerId = getCellDataWithColumnNumber("Sheet1", 0, row);
+            System.out.println("write customer data " + setCellDataWithColumnNumber(sheetName, columnNum, row, "test response"));
+        }
+
+
+    }
+
+    public void verifyCustomerDetails(String sheetName, int columnNum) {
+        int rows = getRowCount("Sheet1");
+        System.out.println("number of rows " + rows);
+        for (int row = 1; row <= rows; row++) {
+            customerId = getCellDataWithColumnNumber("Sheet1", 0, row);
+            String actualResult = getCustomerDetails.getActualResult(customerId);
+            System.out.println("write customer data " + setCellDataWithColumnNumber(sheetName, columnNum, row, actualResult));
+        }
+
     }
 
 

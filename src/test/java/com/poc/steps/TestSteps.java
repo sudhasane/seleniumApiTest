@@ -24,7 +24,7 @@ public class TestSteps {
     public void iVerifyCustomerDetails() {
         xlxsReader.ExcelXLSReader("src/test/resources/testData/DomainsJourneyMockData.xlsx");
 
-        int columnNum = xlxsReader.getCellNumber("Sheet1", "Actual Stage" );
+        int columnNum = xlxsReader.getColumnNumber("Sheet1", "Actual Stage" );
         xlxsReader.getCellData("Sheet1", columnNum);
 
         //below method would fail as get response from api to get expected result is not implemented)

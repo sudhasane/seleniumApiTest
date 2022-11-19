@@ -1,0 +1,32 @@
+{
+  "ContainerName": "AMMyaccountHome",
+  "Channel": "Web",
+  "CustomerID": "NSI_C00B1AF6D6AFF51B8FA041A836483E73",
+  "Direction": "Inbound",
+  "Resource": "AllResults",
+  "Contexts": [
+    {
+      "Type": "Intent",
+      "Value": "Interaction",
+      "Key": "CaseType"
+    },
+    {
+      "Type": "Intent",
+      "Value": "CaseID1234",
+      "Key": "CaseID"
+    },
+    {
+      "Type": "Intent",
+      "Value": "Web.com",
+      "Key": "Brand"
+    },
+    {
+      "Type": "Intent",
+      "Value": "017776131234",
+      "Key": "PhoneNumber"
+    }
+  ]
+}
+
+
+
