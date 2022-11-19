@@ -1,7 +1,8 @@
 
-Reading and writing data to excel
+Read and writr data to excel
 
 XLXSReader class include methods to
+
 1:Read data from excel cell given column name
 getCellDataWithColumnName(String sheetName, String colName, int rowNum)
 
