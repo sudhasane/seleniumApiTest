@@ -1,5 +1,5 @@
 
-Read and writr data to excel
+Read and write data to excel
 
 XLXSReader class include methods to
 
